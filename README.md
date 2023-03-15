@@ -44,4 +44,4 @@ npm run dev
 
 ```
 
-[View the app](https://tiktop-share.vercel.app)
+[View the app](https://tiktop.vercel.app)
