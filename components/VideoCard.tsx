@@ -16,7 +16,7 @@ interface IProps {
 // const VideoCard = ({ post, isShowingOnHome }: IProps) => {            /* aka regular way */
 const VideoCard: NextPage<IProps> = ({ post: { caption, postedBy, video, _id, likes }, isShowingOnHome }) => {
   const [playing, setPlaying] = useState(false)
-  const [isHover, setIsHover] = useState(false)
+  const [isHover, setIsHover] = useState(true)
   const [isVideoMuted, setIsVideoMuted] = useState(false)
   const videoRef = useRef<HTMLVideoElement>(null)
 
@@ -38,9 +38,13 @@ const VideoCard: NextPage<IProps> = ({ post: { caption, postedBy, video, _id, li
 
   if (!isShowingOnHome) {
     return (
-      <div>
+      <div className='w-full'>
         <Link href={`/detail/${_id}`}>
-          <video loop src={video.asset.url} className='w-[250px] md:w-full rounded-xl cursor-pointer'></video>
+          <video
+            loop
+            src={video.asset.url}
+            className='w-[250px] md:w-full rounded-xl cursor-pointer max-h-96 object-cover'
+          ></video>
         </Link>
         <div className='flex gap-2 -mt-8 items-center ml-4'>
           <p className='text-white text-lg font-medium flex gap-1 items-center'>
@@ -83,7 +87,7 @@ const VideoCard: NextPage<IProps> = ({ post: { caption, postedBy, video, _id, li
       </div>
 
       <div className='lg:ml-20 flex gap-4 relative'>
-        <div onMouseEnter={() => setIsHover(true)} onMouseLeave={() => setIsHover(false)} className='rounded-3xl'>
+        <div onMouseEnter={() => setIsHover(true)} /* onMouseLeave={() => setIsHover(false)} */ className='rounded-3xl'>
           <Link href={`/detail/${_id}`}>
             <video
               loop
@@ -96,25 +100,25 @@ const VideoCard: NextPage<IProps> = ({ post: { caption, postedBy, video, _id, li
 
           {isHover && (
             <div
-              className='absolute bottom-6 cursor-pointer left-8 md:left-14 lg:left-0 
-                          flex gap-10 lg:justify-between w-[100px] md:w-[50px] lg:w-[600px] p-3'
+              className='absolute bottom-8 cursor-pointer left-8 md:left-14 lg:left-0 
+                        flex gap-10 lg:justify-between w-[100px] md:w-[50px] lg:w-[600px] p-3'
             >
               {playing ? (
                 <button onClick={onVideoPress}>
-                  <BsFillPauseFill className='text-black text-2xl lg:text-4xl' />
+                  <BsFillPauseFill className='text-black text-2xl lg:text-4xl bg-gray-100 rounded-full p-1' />
                 </button>
               ) : (
                 <button onClick={onVideoPress}>
-                  <BsFillPlayFill className='text-black text-2xl lg:text-4xl' />
+                  <BsFillPlayFill className='text-black text-2xl lg:text-4xl bg-gray-100 rounded-full p-1' />
                 </button>
               )}
               {isVideoMuted ? (
                 <button onClick={() => setIsVideoMuted(false)}>
-                  <HiVolumeOff className='text-black text-2xl lg:text-4xl' />
+                  <HiVolumeOff className='text-black text-2xl lg:text-4xl bg-gray-100 rounded-full p-1' />
                 </button>
               ) : (
                 <button onClick={() => setIsVideoMuted(true)}>
-                  <HiVolumeUp className='text-black text-2xl lg:text-4xl' />
+                  <HiVolumeUp className='text-black text-2xl lg:text-4xl bg-gray-100 rounded-full p-1' />
                 </button>
               )}
             </div>
