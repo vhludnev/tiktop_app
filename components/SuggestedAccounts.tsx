@@ -1,18 +1,12 @@
 import React, { useEffect } from 'react'
 import Image from 'next/image'
-//import { NextPage } from 'next'
 import Link from 'next/link'
 import { GoVerified } from 'react-icons/go'
 
 import { IUser } from '../types'
 import useAuthStore from '@/store/authStore'
 
-// interface IProps {
-//   fetchAllUsers: () => void
-//   allUsers: IUser[]
-// }
-
-const SuggestedAccounts /* : NextPage<IProps> */ = (/* { fetchAllUsers, allUsers } */) => {
+const SuggestedAccounts = () => {
   const { fetchAllUsers, allUsers } = useAuthStore()
 
   useEffect(() => {
@@ -28,7 +22,7 @@ const SuggestedAccounts /* : NextPage<IProps> */ = (/* { fetchAllUsers, allUsers
         {/* getting only first 6 users */}
         {users?.slice(0, 6).map((user: IUser) => (
           <Link href={`/profile/${user._id}`} key={user._id}>
-            <div className='flex gap-3 hover:bg-primary p-2 cursor-pointer font-semibold rounded'>
+            <div className='flex justify-center lg:justify-start gap-3 hover:bg-primary p-2 cursor-pointer font-semibold rounded'>
               <div className='w-8 h-8'>
                 <Image width={34} height={34} className='rounded-full' src={user.image} alt='user-profile' />
               </div>

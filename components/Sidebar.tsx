@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-//import { NextPage } from 'next'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 //import { useGoogleOneTapLogin } from '@react-oauth/google'
@@ -10,12 +9,11 @@ import { ImCancelCircle } from 'react-icons/im'
 import SuggestedAccounts from './SuggestedAccounts'
 import Discover from './Discover'
 import Footer from './Footer'
-//import useAuthStore from '../store/authStore'
 
 const Sidebar = () => {
   const [showSidebar, setShowSidebar] = useState<Boolean>(true)
   const { pathname } = useRouter()
-  //const { fetchAllUsers, allUsers }: any = useAuthStore()
+
   const activeLink =
     'flex items-center gap-3 hover:bg-primary p-3 justify-center xl:justify-start cursor-pointer font-semibold text-[color:var(--primary-color)] rounded'
 
@@ -33,8 +31,8 @@ const Sidebar = () => {
 
   return (
     <div>
-      <div className='block xl:hidden m-2 ml-4 mt-3 text-xl' onClick={() => setShowSidebar(prev => !prev)}>
-        {showSidebar ? <ImCancelCircle /> : <AiOutlineMenu />}
+      <div className='block xl:hidden m-2 ml-7 mt-5 text-2xl' onClick={() => setShowSidebar(prev => !prev)}>
+        {showSidebar ? <ImCancelCircle color='grey' /> : <AiOutlineMenu />}
       </div>
       {showSidebar && (
         <div className='xl:w-400 w-20 flex flex-col justify-start mb-10 border-r-2 border-gray-100 xl:border-0 p-3 '>
@@ -68,7 +66,7 @@ const Sidebar = () => {
           )} */}
 
           <Discover />
-          <SuggestedAccounts /* fetchAllUsers={fetchAllUsers} allUsers={allUsers} */ />
+          <SuggestedAccounts />
           <Footer />
         </div>
       )}

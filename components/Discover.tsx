@@ -17,7 +17,7 @@ const Discover: NextPage = () => {
   return (
     <div className='xl:border-b-2 xl:border-gray-200 pb-6'>
       <p className='text-gray-500 font-semibold m-3 mt-4 hidden xl:block'>Popular Topics</p>
-      <div className='flex gap-3 flex-wrap'>
+      <div className='flex justify-center lg:justify-start gap-3 flex-wrap'>
         {topics?.map(item => (
           <Link href={`/?topic=${item.name}`} key={item.name}>
             <div className={topic === item.name ? activeTopicStyle : topicStyle}>

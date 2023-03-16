@@ -7,6 +7,7 @@ import { HiVolumeUp, HiVolumeOff } from 'react-icons/hi'
 import { BsFillPlayFill, BsFillPauseFill } from 'react-icons/bs'
 import { GoVerified } from 'react-icons/go'
 import { BsPlay } from 'react-icons/bs'
+import { AiOutlineFullscreen } from 'react-icons/ai'
 
 interface IProps {
   post: Video
@@ -16,7 +17,7 @@ interface IProps {
 // const VideoCard = ({ post, isShowingOnHome }: IProps) => {            /* aka regular way */
 const VideoCard: NextPage<IProps> = ({ post: { caption, postedBy, video, _id, likes }, isShowingOnHome }) => {
   const [playing, setPlaying] = useState(false)
-  const [isHover, setIsHover] = useState(true)
+  const [isHover, setIsHover] = useState(false)
   const [isVideoMuted, setIsVideoMuted] = useState(false)
   const videoRef = useRef<HTMLVideoElement>(null)
 
@@ -28,6 +29,10 @@ const VideoCard: NextPage<IProps> = ({ post: { caption, postedBy, video, _id, li
       videoRef?.current?.play()
       setPlaying(true)
     }
+  }
+
+  const onFullScreen = () => {
+    videoRef?.current?.requestFullscreen()
   }
 
   useEffect(() => {
@@ -87,13 +92,13 @@ const VideoCard: NextPage<IProps> = ({ post: { caption, postedBy, video, _id, li
       </div>
 
       <div className='lg:ml-20 flex gap-4 relative'>
-        <div onMouseEnter={() => setIsHover(true)} /* onMouseLeave={() => setIsHover(false)} */ className='rounded-3xl'>
+        <div onMouseEnter={() => setIsHover(true)} onMouseLeave={() => setIsHover(false)} className='rounded-3xl'>
           <Link href={`/detail/${_id}`}>
             <video
               loop
               ref={videoRef}
               src={video.asset.url}
-              className='lg:w-[600px] h-[300px] md:h-[400px] lg:h-[528px] w-[200px] 
+              className='lg:w-[600px] h-[300px] md:h-[400px] lg:h-[528px] w-[90%] 
                         rounded-2xl cursor-pointer bg-gray-100'
             ></video>
           </Link>
@@ -112,6 +117,9 @@ const VideoCard: NextPage<IProps> = ({ post: { caption, postedBy, video, _id, li
                   <BsFillPlayFill className='text-black text-2xl lg:text-4xl bg-gray-100 rounded-full p-1' />
                 </button>
               )}
+              <button onClick={onFullScreen}>
+                <AiOutlineFullscreen className='text-black text-2xl lg:text-4xl bg-gray-100 rounded-full p-1' />
+              </button>
               {isVideoMuted ? (
                 <button onClick={() => setIsVideoMuted(false)}>
                   <HiVolumeOff className='text-black text-2xl lg:text-4xl bg-gray-100 rounded-full p-1' />
